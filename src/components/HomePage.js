@@ -3,6 +3,8 @@
 import React from 'react';
 import {Link} from 'react-router';
 
+import FacebookButton from './FacebookButton';
+
 const HomePage = () => {
   return (
     <div>
@@ -12,6 +14,7 @@ const HomePage = () => {
       <ol>
         <li>list item</li>
       </ol>
+      <FacebookButton fb={window.FB}/>
     </div>
   );
 };
