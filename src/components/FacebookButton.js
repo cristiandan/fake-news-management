@@ -11,8 +11,28 @@ export default class FacebookButton extends React.Component {
       };
 
    }
+   
+   buttonClick() {
+      if (this.state.data.status === 'connected') {
+            this.FB.login();
+      } else {
+            this.FB.logout();
+      }
+   }
 
    componentDidMount() {
+      const self = this;
+      this.FB.getLoginStatus(function(response) {
+            console.log('resp1', response);
+            if (response.status === 'connected') {
+                  self.setState({ message: "Facebook Log out", data: response });
+            }
+            else {
+                  self.setState({ message: "Facebook Log in", data: response });
+            }
+            
+      // this will be called when the roundtrip to Facebook has completed
+      }, true);
       this.FB.Event.subscribe('auth.logout', 
          this.onLogout.bind(this));
       this.FB.Event.subscribe('auth.statusChange', 
@@ -20,22 +40,21 @@ export default class FacebookButton extends React.Component {
    }
       
    onStatusChange(response) {
-      console.log( response );
-      var self = this;
-
       if( response.status === "connected" ) {
-         this.FB.api('/me', function(response) {
-            var message = "Welcome " + response.name;
-            self.setState({
-               message: message
-            });
-         })
+         this.setState({ message: "Facebook Log out", data: response })
+      } else {
+         this.setState({ message: "Facebook Log in", data: response })
       }
+   }
+
+   componentWillUnmount() {
+      // ubsubscribe
    }
 
    onLogout(response) {
       this.setState({
-         message: ""
+         message: "Facebook Log in",
+         data: null
       });
    }
 
@@ -43,15 +62,7 @@ export default class FacebookButton extends React.Component {
 
       return (
          <div>
-            <div 
-               className="fb-login-button" 
-               data-max-rows="1" 
-               data-size="xlarge" 
-               data-show-faces="false" 
-               data-auto-logout-link="true"
-               >
-            </div>
-            <div>{this.state.message}</div>
+            <button onClick={this.buttonClick}>{this.state.message}</button>
          </div>
       );
    }
