@@ -6,7 +6,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import routes from './routes';
 import configureStore from './store/configureStore';
-import { fetchNews } from './actions/actions'
 
 require('./favicon.ico');
 
@@ -24,7 +23,3 @@ render(
 );
 
 console.log('store', store);
-
-store.dispatch(fetchNews()).then(() => 
-  console.log('a')
-)

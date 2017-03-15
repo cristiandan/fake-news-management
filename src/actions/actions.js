@@ -1,18 +1,22 @@
 import { getAllNewsSites } from '../services/dataService'
 
-export const GET_NEWS_REQUEST = "GET_NEWS_REQUEST"
-export const GET_NEWS_SUCCESS = "GET_NEWS_SUCCESS"
+import { 
+  GET_NEWS_REQUEST, 
+  GET_NEWS_SUCCESS, 
+} from '../constants/actionTypes'
 
 export function getNewsRequest() {
+  console.log('request');
   return {
     type: GET_NEWS_REQUEST
   }
 }
 
 export function getNewsSuccess(data) {
+  console.log('get news success', data);
   return {
     type: GET_NEWS_SUCCESS,
-    components: data
+    news: data
   }
 }
 
@@ -24,6 +28,9 @@ export function fetchNews() {
         return getAllNewsSites()
             .then(data => 
                 dispatch(getNewsSuccess(data))
+            )
+            .catch(err =>
+                console.error('error', err)
             )
     }
 }

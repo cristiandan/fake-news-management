@@ -1,69 +1,85 @@
 import React from 'react';
 
 export default class FacebookButton extends React.Component {
-   constructor(props) {
-      super(props);
+      constructor(props) {
+            super(props);
 
-      this.FB = props.fb;
+            this.FB = props.fb;
 
-      this.state = {
-         message: ""
-      };
+            this.state = {
+                  status: null,
+                  authResponse: null,
+            };
 
-   }
-   
-   buttonClick() {
-      if (this.state.data.status === 'connected') {
-            this.FB.login();
-      } else {
-            this.FB.logout();
       }
-   }
 
-   componentDidMount() {
-      const self = this;
-      this.FB.getLoginStatus(function(response) {
-            console.log('resp1', response);
-            if (response.status === 'connected') {
-                  self.setState({ message: "Facebook Log out", data: response });
+      buttonClick() {
+            if (this.state.status === 'connected') {
+                  this.FB.login();
+            } else {
+                  this.FB.logout();
             }
-            else {
-                  self.setState({ message: "Facebook Log in", data: response });
-            }
-            
-      // this will be called when the roundtrip to Facebook has completed
-      }, true);
-      this.FB.Event.subscribe('auth.logout', 
-         this.onLogout.bind(this));
-      this.FB.Event.subscribe('auth.statusChange', 
-         this.onStatusChange.bind(this));
-   }
-      
-   onStatusChange(response) {
-      if( response.status === "connected" ) {
-         this.setState({ message: "Facebook Log out", data: response })
-      } else {
-         this.setState({ message: "Facebook Log in", data: response })
       }
-   }
 
-   componentWillUnmount() {
-      // ubsubscribe
-   }
+      componentDidMount() {
+            window.fbAsyncInit = function () {
+                  FB.init({
+                        appId: '1268723333216786',
+                        cookie: true,
+                        version: 'v2.4'
+                  });
 
-   onLogout(response) {
-      this.setState({
-         message: "Facebook Log in",
-         data: null
-      });
-   }
+                  FB.Event.subscribe('auth.statusChange', this.onStatusChange.bind(this));
 
-   render() {
+                  /*FB.Event.subscribe('auth.statusChange', function (response) {
 
-      return (
-         <div>
-            <button onClick={this.buttonClick}>{this.state.message}</button>
-         </div>
-      );
-   }
-};
+                        this.setState({ data: response });
+                        console.log('status change', response);
+                        // example implementation
+                        // if (response.authResponse) {
+                        //       console.log('Welcome!  Fetching your information.... ');
+                        //       FB.api('/me', function (response) {
+                        //             console.log('Good to see you, ' + response.name + '.');
+                        //       });
+                        // } else {
+                        //       console.log('User cancelled login or did not fully authorize.');
+                        // }
+                  });*/
+
+                  this.FB.getLoginStatus(this.onStatusChange.bind(this), true);
+            }.bind(this);
+
+            // Load the SDK asynchronously
+            (function (d, s, id) {
+                  var js, fjs = d.getElementsByTagName(s)[0];
+                  if (d.getElementById(id)) return;
+                  js = d.createElement(s);
+                  js.id = id;
+                  js.src = "//connect.facebook.net/en_US/sdk.js";
+                  fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+      }
+
+      onStatusChange(response) {
+            this.setState(response);
+      }
+
+      componentWillUnmount() {
+            // ubsubscribe
+      }
+
+      onLogout(response) {
+            this.setState({
+                  data: response
+            });
+      }
+
+      render() {
+            const message = this.state.status === "connected" ? "Facebook Log out" : "Facebook Log in" ;
+            return ( 
+                  <div> 
+                        <button onClick = {this.buttonClick} > { message } </button> 
+                  </div>
+            );
+      }
+}
