@@ -11,6 +11,8 @@ export default class FacebookButton extends React.Component {
                   authResponse: null,
             };
 
+            this.buttonClick = this.buttonClick.bind(this);
+
       }
 
       buttonClick() {

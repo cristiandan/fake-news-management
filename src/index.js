@@ -21,5 +21,3 @@ render(
     <Router history={history} routes={routes} />
   </Provider>, document.getElementById('app')
 );
-
-console.log('store', store);

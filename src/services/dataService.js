@@ -25,9 +25,9 @@ function getAllNewsSites() {
     const docClient = new AWS.DynamoDB.DocumentClient();
     console.log('enter get all news')
     const params = {
-    TableName: 'siteTable'
-  };
-  return docClient.scan(params).promise();
+      TableName: 'siteTable'
+    };
+    return docClient.scan(params).promise();
     
 }
 

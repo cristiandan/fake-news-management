@@ -1,6 +1,6 @@
 const initialState = { 
     newsState: {
-        news: [],
+        newsData: [],
         loading: false
     }
 }

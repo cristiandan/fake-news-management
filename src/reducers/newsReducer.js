@@ -17,7 +17,7 @@ export default function newsReducer(state = initialState.newsState, action) {
         case GET_NEWS_SUCCESS:
             return {
                 ...state,
-                news: action.news,
+                newsData: action.news,
                 loading: false,
             }
         default:

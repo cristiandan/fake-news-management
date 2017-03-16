@@ -16,7 +16,7 @@ export function getNewsSuccess(data) {
   console.log('get news success', data);
   return {
     type: GET_NEWS_SUCCESS,
-    news: data
+    news: data.Items
   }
 }
 
