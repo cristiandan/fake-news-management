@@ -1,5 +1,5 @@
 import { 
-  GET_NEWS_REQUEST, 
+  GET_NEWS_PROCESSING, 
   GET_NEWS_SUCCESS, 
 } from '../constants/actionTypes'
 
@@ -9,7 +9,7 @@ console.log('init', initialState.newsState);
 
 export default function newsReducer(state = initialState.newsState, action) {
     switch (action.type){
-        case GET_NEWS_REQUEST:
+        case GET_NEWS_PROCESSING:
             return {
                 ...state,
                 loading: true,

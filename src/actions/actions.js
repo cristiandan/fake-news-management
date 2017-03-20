@@ -1,36 +1,39 @@
 import { getAllNewsSites } from '../services/dataService'
+import { login } from '../services/fbService'
 
 import { 
-  GET_NEWS_REQUEST, 
+  GET_NEWS_PROCESSING, 
   GET_NEWS_SUCCESS, 
+  PROCESSING_LOGIN,
+  SUCCESS_LOGIN,
+  FAIL_LOGIN,
 } from '../constants/actionTypes'
 
-export function getNewsRequest() {
-  console.log('request');
-  return {
-    type: GET_NEWS_REQUEST
-  }
+export const fetchUserData = () => {
+  
 }
 
-export function getNewsSuccess(data) {
-  console.log('get news success', data);
-  return {
-    type: GET_NEWS_SUCCESS,
-    news: data.Items
-  }
-}
-
-export function fetchNews() {
-  console.log('enter fetch');
-    return function(dispatch) {
-        dispatch(getNewsRequest())
+export const fetchNews = () => {
+    return dispatch => {
+        dispatch({ type: GET_NEWS_PROCESSING })
 
         return getAllNewsSites()
             .then(data => 
-                dispatch(getNewsSuccess(data))
+                dispatch({ type: GET_NEWS_SUCCESS, payload: data.Items })
             )
             .catch(err =>
                 console.error('error', err)
             )
     }
 }
+
+export const logIn = () => {
+      return dispatch => {
+         dispatch({ type: PROCESSING_LOGIN });
+         login()
+            .then(
+                res => dispatch({ type: SUCCESS_LOGIN, payload: res }),
+                err => dispatch({ type: FAIL_LOGIN, payload: err })
+            );
+      };
+    };

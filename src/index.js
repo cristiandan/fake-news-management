@@ -6,6 +6,8 @@ import { syncHistoryWithStore, routerMiddleware  } from 'react-router-redux';
 
 import routes from './routes';
 import configureStore from './store/configureStore';
+import { initFacebook } from './services/fbService';
+import { logIn } from './actions/actions';
 
 require('./favicon.ico');
 
@@ -21,3 +23,6 @@ render(
     <Router history={history} routes={routes} />
   </Provider>, document.getElementById('app')
 );
+
+
+initFacebook().then(() => {store.dispatch(logIn)});
