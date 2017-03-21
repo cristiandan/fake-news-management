@@ -1,12 +1,12 @@
 import { getAllNewsSites } from '../services/dataService'
-import { login } from '../services/fbService'
+import { getStatus } from '../services/fbService'
 
 import { 
   GET_NEWS_PROCESSING, 
   GET_NEWS_SUCCESS, 
   PROCESSING_LOGIN,
-  SUCCESS_LOGIN,
-  FAIL_LOGIN,
+  USER_LOGGED_IN,
+  USER_LOGGED_IN_FAIL,
 } from '../constants/actionTypes'
 
 export const fetchUserData = () => {
@@ -30,10 +30,10 @@ export const fetchNews = () => {
 export const logIn = () => {
       return dispatch => {
          dispatch({ type: PROCESSING_LOGIN });
-         login()
+         getStatus()
             .then(
-                res => dispatch({ type: SUCCESS_LOGIN, payload: res }),
-                err => dispatch({ type: FAIL_LOGIN, payload: err })
+                res => dispatch({ type: USER_LOGGED_IN, payload: res }),
+                err => dispatch({ type: USER_LOGGED_IN_FAIL, payload: err })
             );
       };
     };

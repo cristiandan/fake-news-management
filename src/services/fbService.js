@@ -18,17 +18,28 @@ export const initFacebook = () => new Promise((resolve, reject) => {
     }(document, 'script', 'facebook-jssdk'));
 });
 
+export const getStatus = () => new Promise((resolve, reject) => {
+    window.FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+            window.FB.api('/me', function(user) {
+                resolve({ ...response, user });
+            });
+        } else {
+            resolve(response);
+        }
+    });
+});
+
 export const login = () => new Promise((resolve, reject) => {
+    console.log('data services login');
     window.FB.login(function(response) {
-        if (response.authResponse) {
-            console.log('first', response);
-            window.FB.api('/me', function(response) {
-                console.log('second', response);
-                resolve(response);
+        if (response.status === 'connected') {
+            window.FB.api('/me', function(user) {
+                resolve({ ...response, user });
             });
         }
         else {
-            reject();
+            resolve(response);
         }
     })
 });

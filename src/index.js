@@ -25,4 +25,4 @@ render(
 );
 
 
-initFacebook().then(() => {store.dispatch(logIn)});
+initFacebook().then(() => {store.dispatch(logIn())});

@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 import { UserAuthWrapper } from 'redux-auth-wrapper'
 import { routerActions } from 'react-router-redux'
 
-import App from './components/App';
+import Main from './components/Main';
 import HomePage from './containers/HomePageContainer';
 import AboutPage from './components/AboutPage';
 
@@ -14,7 +14,7 @@ const UserIsAuthenticated = UserAuthWrapper({
 })
 
 export default (
-  <Route path="/" component={App}>
+  <Route path="/" component={Main}>
     <IndexRoute component={HomePage}/>
     <Route path="about" component={UserIsAuthenticated(AboutPage)}/>
   </Route>
