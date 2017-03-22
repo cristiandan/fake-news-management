@@ -2,13 +2,14 @@
 
 import React from 'react';
 import NewsSite from './NewsSite';
+import { Accordion } from 'react-bootstrap';
 
 const NewsSiteList = (props) => {
     const sitesList = props.news.map((item) => <NewsSite key={item.name} name={item.name} type={item.type} desc={item.desc}/>)
     return ( 
-        <div>
+        <Accordion>
             {sitesList}
-        </div>
+        </Accordion>
     );
 };
 
