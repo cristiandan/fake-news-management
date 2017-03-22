@@ -9,7 +9,7 @@ const UserGreeting = (props) => {
         props.userData.status === "connected" ?
             <div>
                 <p>Salut, {props.userData.user.name}!</p>
-                <Link to="/about">Intra in aplicatie</Link>
+                <Link to="/app">Intra in aplicatie</Link>
            </div>
            :
            <div>

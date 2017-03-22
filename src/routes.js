@@ -5,6 +5,7 @@ import { routerActions } from 'react-router-redux'
 
 import Main from './components/Main';
 import HomePage from './containers/HomePageContainer';
+import AppPage from './containers/AppPageContainer';
 import AboutPage from './components/AboutPage';
 
 const UserIsAuthenticated = UserAuthWrapper({
@@ -16,6 +17,7 @@ const UserIsAuthenticated = UserAuthWrapper({
 export default (
   <Route path="/" component={Main}>
     <IndexRoute component={HomePage}/>
-    <Route path="about" component={UserIsAuthenticated(AboutPage)}/>
+    <Route path="app" component={UserIsAuthenticated(AppPage)}/>
+    <Route path="about" component={AboutPage}/>
   </Route>
 );

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import HomePage from '../components/HomePage'
-import { fetchNews } from '../actions/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -10,7 +9,7 @@ const mapStateToProps = (state) => {
 
 
 const HomePageContainer = connect(
-    mapStateToProps,
+    mapStateToProps,    
 )(HomePage);
 
 export default HomePageContainer
