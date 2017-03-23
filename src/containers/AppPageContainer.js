@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import AppPage from '../components/AppPage'
-import { fetchNews } from '../actions/actions'
+import { fetchNews, editSite, saveSite } from '../actions/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -11,7 +11,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadNews: () => {
-      dispatch(fetchNews());
+        dispatch(fetchNews());
+    },
+    onClickEdit: (index) => {
+        dispatch(editSite(index));
+    },
+    onClickSave: (index, site) => {
+        console.log('save', index, site);
+        dispatch(saveSite(index, site));
     }
   }
 }

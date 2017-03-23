@@ -2,11 +2,17 @@
 
 import React from 'react';
 import { Panel } from 'react-bootstrap';
+import NewsSiteEditable from './NewsSiteEditable';
+import NewsSiteDisplay from './NewsSiteDisplay';
 
 const NewsSite = (props) => {
     return ( 
         <Panel header={props.name}>
-            <div>{props.desc}</div>
+            { props.editing ? 
+                <NewsSiteEditable {...props}/>
+                :
+                <NewsSiteDisplay {...props}/>
+            }
         </Panel>
     );
 };

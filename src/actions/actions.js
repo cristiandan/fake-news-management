@@ -7,6 +7,8 @@ import {
   PROCESSING_LOGIN,
   USER_LOGGED_IN,
   USER_LOGGED_IN_FAIL,
+  EDITING_SITE,
+  SAVE_SITE
 } from '../constants/actionTypes'
 
 export const fetchUserData = () => {
@@ -37,3 +39,19 @@ export const logIn = () => {
             );
       };
     };
+
+export const editSite = (index) => {
+    return {
+        type: EDITING_SITE,
+        payload: index
+    }
+}
+
+export const saveSite = (index, site) => {
+    // dispatch api 
+    console.log('')
+    return {
+        type: SAVE_SITE,
+        payload: {index, site}
+    }
+}

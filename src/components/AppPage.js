@@ -6,6 +6,8 @@ import NewsSiteList from './NewsSiteList';
 class AppPage extends React.Component {
     constructor(props) {
         super(props);
+
+        console.log('props', this.props);
     }
     componentWillMount() {
         this.props.loadNews();
@@ -18,7 +20,7 @@ class AppPage extends React.Component {
 
             <h2>News</h2>
             <ol>
-                <NewsSiteList news={this.props.news.newsData}/>
+                <NewsSiteList news={this.props.news.newsData} onClickEdit={this.props.onClickEdit} onClickSave={this.props.onClickSave}/>
             </ol>
             </div>
         );
