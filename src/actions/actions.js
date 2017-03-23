@@ -49,7 +49,6 @@ export const editSite = (index) => {
 
 export const saveSite = (index, site) => {
     // dispatch api 
-    console.log('')
     return {
         type: SAVE_SITE,
         payload: {index, site}

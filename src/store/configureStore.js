@@ -4,12 +4,10 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 
 function configureStoreProd(initialState, middlewareList) {
-  console.log('mid', middlewareList);
   const middlewares = [
     ...middlewareList,
     thunk,
   ];
-console.log('mid2', middlewares);
   return createStore(rootReducer, initialState, compose(
     applyMiddleware(...middlewares)
     )
@@ -17,13 +15,11 @@ console.log('mid2', middlewares);
 }
 
 function configureStoreDev(initialState, middlewareList) {
-  console.log('mid', middlewareList);
   const middlewares = [
     ...middlewareList,
     reduxImmutableStateInvariant(),
     thunk,
   ];
-  console.log('mid2', middlewares);
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // add support for Redux dev tools
   const store = createStore(rootReducer, initialState, composeEnhancers(

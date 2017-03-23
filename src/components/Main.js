@@ -13,7 +13,7 @@ class Main extends React.Component {
               <a href="#">App</a>
             </Navbar.Brand>
           </Navbar.Header>
-          <Nav bsStyle="pills" activeKey={1} onSelect={(a,b) => console.log('aa',a,b)}>
+          <Nav bsStyle="pills" activeKey={1}>
             <IndexLinkContainer to="/">
               <NavItem eventKey={1} href="/">Home</NavItem>
             </IndexLinkContainer>

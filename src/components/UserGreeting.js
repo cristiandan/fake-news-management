@@ -4,7 +4,6 @@ import React from 'react';
 import {Link} from 'react-router';
 
 const UserGreeting = (props) => {
-    console.log('rpo',props)
     return ( 
         props.userData.status === "connected" ?
             <div>

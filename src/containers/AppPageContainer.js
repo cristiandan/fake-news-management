@@ -17,7 +17,6 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(editSite(index));
     },
     onClickSave: (index, site) => {
-        console.log('save', index, site);
         dispatch(saveSite(index, site));
     }
   }

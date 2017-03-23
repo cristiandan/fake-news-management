@@ -7,8 +7,6 @@ import {
 
 import initialState from './initialState'
 
-console.log('init', initialState.newsState);
-
 export default function newsReducer(state = initialState.newsState, action) {
     switch (action.type){
         case GET_NEWS_PROCESSING:

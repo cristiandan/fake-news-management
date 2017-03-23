@@ -6,8 +6,6 @@ import NewsSiteList from './NewsSiteList';
 class AppPage extends React.Component {
     constructor(props) {
         super(props);
-
-        console.log('props', this.props);
     }
     componentWillMount() {
         this.props.loadNews();
